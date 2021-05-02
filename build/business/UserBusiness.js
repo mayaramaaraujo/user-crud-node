@@ -33,7 +33,7 @@ class UserBusiness {
                     throw new CharacterSizeError_1.CharacterSizeError("The field bio cannot be longer than 100 characters.");
                 }
                 const id = IdGenerator_1.idGenerator.generate();
-                const newUser = new User_1.default(id, user.name.toLowerCase(), user.lastname.toLowerCase(), user.nickname.toLowerCase(), user.address.toLowerCase(), user.bio.toLowerCase());
+                const newUser = new User_1.default(id, user.name, user.lastname, user.nickname, user.address, user.bio);
                 yield UserDatabase_1.userDatabase.create(newUser);
                 const createdUser = yield UserDatabase_1.userDatabase.getById(id);
                 return createdUser;
@@ -91,13 +91,13 @@ class UserBusiness {
                 }
                 let result = [];
                 if (name && !lastname) {
-                    result = yield UserDatabase_1.userDatabase.searchByName(name.toLowerCase());
+                    result = yield UserDatabase_1.userDatabase.searchByName(name);
                 }
                 if (!name && lastname) {
-                    result = yield UserDatabase_1.userDatabase.searchByLastName(lastname.toLowerCase());
+                    result = yield UserDatabase_1.userDatabase.searchByLastName(lastname);
                 }
                 if (name && lastname) {
-                    result = yield UserDatabase_1.userDatabase.searchByNameAndLastname(name.toLowerCase(), lastname.toLowerCase());
+                    result = yield UserDatabase_1.userDatabase.searchByNameAndLastname(name, lastname);
                 }
                 if (!result) {
                     throw new NotFoundError_1.NotFoundError("No users found.");

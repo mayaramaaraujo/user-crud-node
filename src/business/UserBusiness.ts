@@ -25,11 +25,11 @@ export default class UserBusiness {
 
       const newUser: User = new User(
         id,
-        user.name.toLowerCase(),
-        user.lastname.toLowerCase(),
-        user.nickname.toLowerCase(),
-        user.address.toLowerCase(),
-        user.bio.toLowerCase()
+        user.name,
+        user.lastname,
+        user.nickname,
+        user.address,
+        user.bio
       );
 
       await userDatabase.create(newUser);
@@ -92,15 +92,15 @@ export default class UserBusiness {
       let result: any = [];
 
       if(name && !lastname) {
-        result = await userDatabase.searchByName(name.toLowerCase())
+        result = await userDatabase.searchByName(name)
       }
 
       if(!name && lastname) {
-        result = await userDatabase.searchByLastName(lastname.toLowerCase())
+        result = await userDatabase.searchByLastName(lastname)
       }
 
       if(name && lastname) {
-        result = await userDatabase.searchByNameAndLastname(name.toLowerCase(), lastname.toLowerCase())
+        result = await userDatabase.searchByNameAndLastname(name, lastname)
       }
 
       if(!result) {

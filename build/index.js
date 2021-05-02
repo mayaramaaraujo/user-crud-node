@@ -12,5 +12,5 @@ app.use(cors_1.default());
 app.use(express_1.default.json());
 dotenv_1.default.config();
 app.use("/user", userRouter_1.userRouter);
-app.listen(3333, () => console.log("Servidor rodando na porta 3333"));
+app.listen(process.env.PORT || 3333, () => console.log("Servidor rodando na porta 3333"));
 //# sourceMappingURL=index.js.map
