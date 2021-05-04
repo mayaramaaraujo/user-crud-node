@@ -130,7 +130,7 @@ class UserDatabase extends BaseDatabase_1.default {
                 return userByDB[0];
             }
             catch (error) {
-                throw new Error(error.message || error.sqlMessage);
+                throw new Error(error);
             }
         });
     }

@@ -1,4 +1,4 @@
-import UserDatabase, { userDatabase } from '../database/UserDatabase';
+import { userDatabase } from '../database/UserDatabase';
 import User, { update_data, UserByDB, UserByNickname, UserInput } from '../models/User';
 import { idGenerator } from '../services/IdGenerator';
 import { CharacterSizeError } from '../error/CharacterSizeError';
