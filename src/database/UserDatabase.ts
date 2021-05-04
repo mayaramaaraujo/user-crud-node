@@ -107,7 +107,7 @@ export default class UserDatabase extends BaseDatabase {
 
       return userByDB[0];
     } catch (error) {
-      throw new Error(error.message || error.sqlMessage)
+      throw new Error(error)
     }
   }
 }

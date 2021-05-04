@@ -1,6 +1,10 @@
 import knex, { Knex } from "knex";
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export default class BaseDatabase {
+
   protected tableName = { user: "user" }
 
   protected connection: Knex = knex({

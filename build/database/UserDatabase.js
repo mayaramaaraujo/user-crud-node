@@ -30,7 +30,7 @@ class UserDatabase extends BaseDatabase_1.default {
                     .into(this.tableName.user);
             }
             catch (error) {
-                throw new Error(error.message || error.sqlMessage);
+                throw new Error(error);
             }
         });
     }
@@ -130,7 +130,7 @@ class UserDatabase extends BaseDatabase_1.default {
                 return userByDB[0];
             }
             catch (error) {
-                throw new Error(error.message || error.sqlMessage);
+                throw new Error(error);
             }
         });
     }
