@@ -82,6 +82,18 @@ export default class UserController {
       res.status(error.customErrorCode || 400).send(error.sqlMessage || error.message)
     }
   }
+
+  public async getAll(req: Request, res: Response):Promise<void> {
+    try {
+      const allUsers: UserByDB[] = await userBusiness.getAll();
+
+      res.status(200).send({
+        users: allUsers
+      })      
+    } catch (error) {
+      res.status(error.customErrorCode || 400).send(error.sqlMessage || error.message)
+    }
+  }
 }
 
 export const userController: UserController = new UserController();

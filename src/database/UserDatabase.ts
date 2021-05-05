@@ -55,7 +55,7 @@ export default class UserDatabase extends BaseDatabase {
         .from(this.tableName.user)
         .where('id', id)
 
-      return user
+      return user[0]
     } catch (error) {
       throw new Error(error.message || error.sqlMessage)
     }
@@ -106,6 +106,19 @@ export default class UserDatabase extends BaseDatabase {
         .where('nickname', nickname)
 
       return userByDB[0];
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  public async getAll():Promise<UserByDB[]> {
+    try { 
+      const allUsers: UserByDB[] = await this.connection()
+        .select()
+        .from(this.tableName.user)
+
+
+      return allUsers;
     } catch (error) {
       throw new Error(error)
     }

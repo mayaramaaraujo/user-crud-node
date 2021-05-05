@@ -12,4 +12,5 @@ exports.userRouter.get("/search", UserController_1.userController.search);
 exports.userRouter.get("/:nickname", UserController_1.userController.byNickname);
 exports.userRouter.put("/:id", UserController_1.userController.update);
 exports.userRouter.delete("/:id", UserController_1.userController.delete);
+exports.userRouter.get("/all", UserController_1.userController.getAll);
 //# sourceMappingURL=userRouter.js.map

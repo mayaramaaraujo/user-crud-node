@@ -47,7 +47,13 @@ export default class UserBusiness {
 
   public async update(id: string, updated_data: update_data) {
     try {
-      if(
+      const userById: UserByDB = await userDatabase.getById(id);
+
+      if(!userById) {
+        throw new Error("User not found.")
+      }
+
+      if (
         !updated_data.lastname &&
         !updated_data.address && 
         !updated_data.nickname
@@ -132,6 +138,16 @@ export default class UserBusiness {
       }
 
       return user;
+    } catch (error) {
+      throw new Error(error.message || error.sqlMessage)
+    }
+  }
+
+  public async getAll():Promise<UserByDB[]> {
+    try {
+      const allUsers: UserByDB[] = await userDatabase.getAll();
+
+      return allUsers;
     } catch (error) {
       throw new Error(error.message || error.sqlMessage)
     }

@@ -131,6 +131,17 @@ class UserBusiness {
             }
         });
     }
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const allUsers = yield UserDatabase_1.userDatabase.getAll();
+                return allUsers;
+            }
+            catch (error) {
+                throw new Error(error.message || error.sqlMessage);
+            }
+        });
+    }
 }
 exports.default = UserBusiness;
 exports.userBusiness = new UserBusiness();
