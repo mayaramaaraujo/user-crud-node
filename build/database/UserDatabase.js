@@ -71,7 +71,7 @@ class UserDatabase extends BaseDatabase_1.default {
                     .select()
                     .from(this.tableName.user)
                     .where('id', id);
-                return user;
+                return user[0];
             }
             catch (error) {
                 throw new Error(error.message || error.sqlMessage);

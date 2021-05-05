@@ -7,10 +7,10 @@ exports.userRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const UserController_1 = require("../controller/UserController");
 exports.userRouter = express_1.default.Router();
+exports.userRouter.get("/all", UserController_1.userController.getAll);
 exports.userRouter.post("/create", UserController_1.userController.create);
 exports.userRouter.get("/search", UserController_1.userController.search);
 exports.userRouter.get("/:nickname", UserController_1.userController.byNickname);
 exports.userRouter.put("/:id", UserController_1.userController.update);
 exports.userRouter.delete("/:id", UserController_1.userController.delete);
-exports.userRouter.get("/all", UserController_1.userController.getAll);
 //# sourceMappingURL=userRouter.js.map

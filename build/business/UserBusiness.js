@@ -51,6 +51,10 @@ class UserBusiness {
     update(id, updated_data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                const userById = yield UserDatabase_1.userDatabase.getById(id);
+                if (!userById) {
+                    throw new Error("User not found.");
+                }
                 if (!updated_data.lastname &&
                     !updated_data.address &&
                     !updated_data.nickname) {
