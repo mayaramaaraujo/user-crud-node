@@ -134,6 +134,19 @@ class UserDatabase extends BaseDatabase_1.default {
             }
         });
     }
+    getAll() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const allUsers = yield this.connection()
+                    .select()
+                    .from(this.tableName.user);
+                return allUsers;
+            }
+            catch (error) {
+                throw new Error(error);
+            }
+        });
+    }
 }
 exports.default = UserDatabase;
 exports.userDatabase = new UserDatabase();

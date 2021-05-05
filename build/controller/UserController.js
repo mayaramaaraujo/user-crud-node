@@ -90,6 +90,19 @@ class UserController {
             }
         });
     }
+    getAll(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const allUsers = yield UserBusiness_1.userBusiness.getAll();
+                res.status(200).send({
+                    users: allUsers
+                });
+            }
+            catch (error) {
+                res.status(error.customErrorCode || 400).send(error.sqlMessage || error.message);
+            }
+        });
+    }
 }
 exports.default = UserController;
 exports.userController = new UserController();
