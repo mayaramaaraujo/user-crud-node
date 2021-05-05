@@ -4,13 +4,15 @@ import { update_data, UserByDB, UserByNickname, UserInput } from '../models/User
 
 export default class UserController {
   public async create(req: Request, res: Response) {
+    const {name, lastname, nickname, address, bio} = req.body
+
     try {
       const user: UserInput = {
-        name: req.body.name,
-        lastname: req.body.lastname,
-        nickname: req.body.nickname,
-        address: req.body.address,
-        bio: req.body.bio
+        name,
+        lastname,
+        nickname,
+        address,
+        bio
       }
 
       const newUser: UserByDB = await userBusiness.create(user);
@@ -25,20 +27,22 @@ export default class UserController {
   }
 
   public async update(req: Request, res: Response) {
+    const {lastname, nickname, address} = req.body
+
     try {
       const id: string = req.params.id as string;
 
       const updated_data: update_data = {
-        lastname: req.body.lastname,
-        address: req.body.address,
-        nickname: req.body.nickname
+        lastname,
+        address,
+        nickname
       }
 
       const updatedUser: UserByDB = await userBusiness.update(id, updated_data)
 
       res.status(200).send({
         message: "User updated successfully.",
-        updatedUser: updatedUser
+        updatedUser
       })
 
     } catch (error) {

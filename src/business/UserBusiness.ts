@@ -8,16 +8,18 @@ import { NotFoundError } from '../error/NotFoundError';
 export default class UserBusiness {
 
   public async create(user: UserInput): Promise<UserByDB> {
+    const {name, lastname, nickname, address, bio} = user
+
     try {
-      if (!user.name || !user.lastname || !user.nickname || !user.address || !user.bio) {
+      if (!name || !lastname || !nickname || !address || !bio) {
         throw new Error("Fill in all fields.")
       }
 
-      if (user.nickname.length > 30) {
+      if (nickname.length > 30) {
         throw new CharacterSizeError("The field nickname cannot be longer than 30 characters.")
       }
 
-      if (user.bio.length > 100) {
+      if (bio.length > 100) {
         throw new CharacterSizeError("The field bio cannot be longer than 100 characters.")
       }
 
@@ -25,11 +27,11 @@ export default class UserBusiness {
 
       const newUser: User = new User(
         id,
-        user.name,
-        user.lastname,
-        user.nickname,
-        user.address,
-        user.bio
+        name,
+        lastname,
+        nickname,
+        address,
+        bio
       );
 
       await userDatabase.create(newUser);
@@ -46,6 +48,8 @@ export default class UserBusiness {
   }
 
   public async update(id: string, updated_data: update_data) {
+    const {lastname, address, nickname} = updated_data
+
     try {
       const userById: UserByDB = await userDatabase.getById(id);
 
@@ -54,15 +58,15 @@ export default class UserBusiness {
       }
 
       if (
-        !updated_data.lastname &&
-        !updated_data.address && 
-        !updated_data.nickname
+        !lastname &&
+        !address && 
+        !nickname
       ) {
         throw new Error("It is necessary to pass a lastname, an address or nickname to update user.")
       }     
       
-      if(updated_data.nickname) {
-        const userByNickname: UserByDB = await userDatabase.byNickname(updated_data.nickname)
+      if(nickname) {
+        const userByNickname: UserByDB = await userDatabase.byNickname(nickname)
 
         if(userByNickname) {
           throw new DuplicateError("Nickname already in use.");
