@@ -25,7 +25,8 @@ class UserDatabase extends BaseDatabase_1.default {
                     lastname: user.getLastName(),
                     nickname: user.getNickname(),
                     address: user.getAddress(),
-                    bio: user.getBio()
+                    bio: user.getBio(),
+                    img: user.getImg()
                 })
                     .into(this.tableName.user);
             }
@@ -41,7 +42,8 @@ class UserDatabase extends BaseDatabase_1.default {
                     .update({
                     lastname: update_data.lastname,
                     address: update_data.address,
-                    nickname: update_data.nickname
+                    nickname: update_data.nickname,
+                    img: update_data.img
                 })
                     .where("id", id);
                 const updatedUser = yield this.getById(id);

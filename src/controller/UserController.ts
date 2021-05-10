@@ -4,7 +4,7 @@ import { update_data, UserByDB, UserByNickname, UserInput } from '../models/User
 
 export default class UserController {
   public async create(req: Request, res: Response) {
-    const {name, lastname, nickname, address, bio} = req.body
+    const {name, lastname, nickname, address, bio, img} = req.body
 
     try {
       const user: UserInput = {
@@ -12,7 +12,8 @@ export default class UserController {
         lastname,
         nickname,
         address,
-        bio
+        bio,
+        img
       }
 
       const newUser: UserByDB = await userBusiness.create(user);
@@ -27,7 +28,7 @@ export default class UserController {
   }
 
   public async update(req: Request, res: Response) {
-    const {lastname, nickname, address} = req.body
+    const {lastname, nickname, address, img} = req.body
 
     try {
       const id: string = req.params.id as string;
@@ -35,7 +36,8 @@ export default class UserController {
       const updated_data: update_data = {
         lastname,
         address,
-        nickname
+        nickname,
+        img
       }
 
       const updatedUser: UserByDB = await userBusiness.update(id, updated_data)

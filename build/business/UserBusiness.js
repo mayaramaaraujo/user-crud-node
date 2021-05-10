@@ -22,18 +22,19 @@ const NotFoundError_1 = require("../error/NotFoundError");
 class UserBusiness {
     create(user) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { name, lastname, nickname, address, bio, img } = user;
             try {
-                if (!user.name || !user.lastname || !user.nickname || !user.address || !user.bio) {
+                if (!name || !lastname || !nickname || !address || !bio || !img) {
                     throw new Error("Fill in all fields.");
                 }
-                if (user.nickname.length > 30) {
+                if (nickname.length > 30) {
                     throw new CharacterSizeError_1.CharacterSizeError("The field nickname cannot be longer than 30 characters.");
                 }
-                if (user.bio.length > 100) {
+                if (bio.length > 100) {
                     throw new CharacterSizeError_1.CharacterSizeError("The field bio cannot be longer than 100 characters.");
                 }
                 const id = IdGenerator_1.idGenerator.generate();
-                const newUser = new User_1.default(id, user.name, user.lastname, user.nickname, user.address, user.bio);
+                const newUser = new User_1.default(id, name, lastname, nickname, address, bio, img);
                 yield UserDatabase_1.userDatabase.create(newUser);
                 const createdUser = yield UserDatabase_1.userDatabase.getById(id);
                 return createdUser;
@@ -50,18 +51,19 @@ class UserBusiness {
     }
     update(id, updated_data) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { lastname, address, nickname } = updated_data;
             try {
                 const userById = yield UserDatabase_1.userDatabase.getById(id);
                 if (!userById) {
                     throw new Error("User not found.");
                 }
-                if (!updated_data.lastname &&
-                    !updated_data.address &&
-                    !updated_data.nickname) {
+                if (!lastname &&
+                    !address &&
+                    !nickname) {
                     throw new Error("It is necessary to pass a lastname, an address or nickname to update user.");
                 }
-                if (updated_data.nickname) {
-                    const userByNickname = yield UserDatabase_1.userDatabase.byNickname(updated_data.nickname);
+                if (nickname) {
+                    const userByNickname = yield UserDatabase_1.userDatabase.byNickname(nickname);
                     if (userByNickname) {
                         throw new DuplicateError_1.DuplicateError("Nickname already in use.");
                     }
@@ -126,7 +128,8 @@ class UserBusiness {
                 const user = {
                     name: userByDB.name,
                     lastname: userByDB.lastname,
-                    nickname: userByDB.nickname
+                    nickname: userByDB.nickname,
+                    img: userByDB.img
                 };
                 return user;
             }

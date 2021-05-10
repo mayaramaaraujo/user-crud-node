@@ -14,13 +14,15 @@ const UserBusiness_1 = require("../business/UserBusiness");
 class UserController {
     create(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { name, lastname, nickname, address, bio, img } = req.body;
             try {
                 const user = {
-                    name: req.body.name,
-                    lastname: req.body.lastname,
-                    nickname: req.body.nickname,
-                    address: req.body.address,
-                    bio: req.body.bio
+                    name,
+                    lastname,
+                    nickname,
+                    address,
+                    bio,
+                    img
                 };
                 const newUser = yield UserBusiness_1.userBusiness.create(user);
                 res.status(200).send({
@@ -35,17 +37,19 @@ class UserController {
     }
     update(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            const { lastname, nickname, address, img } = req.body;
             try {
                 const id = req.params.id;
                 const updated_data = {
-                    lastname: req.body.lastname,
-                    address: req.body.address,
-                    nickname: req.body.nickname
+                    lastname,
+                    address,
+                    nickname,
+                    img
                 };
                 const updatedUser = yield UserBusiness_1.userBusiness.update(id, updated_data);
                 res.status(200).send({
                     message: "User updated successfully.",
-                    updatedUser: updatedUser
+                    updatedUser
                 });
             }
             catch (error) {
