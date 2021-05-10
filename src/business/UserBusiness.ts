@@ -8,10 +8,10 @@ import { NotFoundError } from '../error/NotFoundError';
 export default class UserBusiness {
 
   public async create(user: UserInput): Promise<UserByDB> {
-    const {name, lastname, nickname, address, bio} = user
+    const {name, lastname, nickname, address, bio, img} = user
 
     try {
-      if (!name || !lastname || !nickname || !address || !bio) {
+      if (!name || !lastname || !nickname || !address || !bio || !img) {
         throw new Error("Fill in all fields.")
       }
 
@@ -31,7 +31,8 @@ export default class UserBusiness {
         lastname,
         nickname,
         address,
-        bio
+        bio,
+        img
       );
 
       await userDatabase.create(newUser);
@@ -138,7 +139,8 @@ export default class UserBusiness {
       const user: UserByNickname = {
         name: userByDB.name,
         lastname: userByDB.lastname,
-        nickname: userByDB.nickname
+        nickname: userByDB.nickname,
+        img: userByDB.img
       }
 
       return user;

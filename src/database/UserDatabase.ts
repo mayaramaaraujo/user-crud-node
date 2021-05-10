@@ -11,7 +11,8 @@ export default class UserDatabase extends BaseDatabase {
           lastname: user.getLastName(),
           nickname: user.getNickname(),
           address: user.getAddress(),
-          bio: user.getBio()
+          bio: user.getBio(),
+          img: user.getImg()
         })
         .into(this.tableName.user)
     } catch (error) {
@@ -25,7 +26,8 @@ export default class UserDatabase extends BaseDatabase {
       .update({
         lastname: update_data.lastname,
         address: update_data.address,
-        nickname: update_data.nickname
+        nickname: update_data.nickname,
+        img: update_data.img
       })
       .where("id", id)
 

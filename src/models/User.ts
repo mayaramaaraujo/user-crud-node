@@ -5,38 +5,44 @@ export default class User {
     private lastname: string,
     private nickname: string,
     private address: string,
-    private bio: string
+    private bio: string,
+    private img: string
   ) {
     this.id = id,
     this.name = name,
     this.lastname = lastname,
     this.nickname = nickname,
     this.address = address,
-    this.bio = bio
+    this.bio = bio,
+    this.img = img
   }
 
   getId() {
-    return this.id
+    return this.id;
   }
 
   getName() {
-    return this.name
+    return this.name;
   }
 
   getLastName() {
-    return this.lastname
+    return this.lastname;
   }
 
   getNickname() {
-    return this.nickname
+    return this.nickname;
   }
 
   getAddress() {
-    return this.address
+    return this.address;
   }
 
   getBio() {
-    return this.bio
+    return this.bio;
+  }
+
+  getImg() {
+    return this.img;
   }
 }
 
@@ -46,7 +52,8 @@ export interface UserInput {
   lastname: string,
   nickname: string,
   address: string,
-  bio: string
+  bio: string,
+  img: string
 }
 
 export interface UserByDB {
@@ -56,6 +63,7 @@ export interface UserByDB {
   nickname: string,
   address: string,
   bio: string,
+  img: string,
   created_at: Date,
   update_at: Date | null
 }
@@ -63,11 +71,13 @@ export interface UserByDB {
 export interface UserByNickname {
   name: string,
   lastname: string,
-  nickname: string
+  nickname: string,
+  img: string
 }
 
 export interface update_data {
   lastname: string,
   address: string,
   nickname: string
+  img: string
 }
